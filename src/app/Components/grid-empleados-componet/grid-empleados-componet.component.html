@@ -1,0 +1,214 @@
+<!-- <button type="button" class="btn btn-primary">Primary</button>
+<button type="button" class="btn btn-secondary">Secondary</button>
+<button type="button" class="btn btn-success">Success</button>
+<button type="button" class="btn btn-danger">Danger</button>
+<button type="button" class="btn btn-warning">Warning</button>
+<button type="button" class="btn btn-info">Info</button>
+<button type="button" class="btn btn-light">Light</button>
+<button type="button" class="btn btn-dark">Dark</button> -->
+
+<!-- <button type="button" class="btn btn-link">Link</button> -->
+
+<ng-template #longContent let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">NUEVO EMPLEADO</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form>
+      <div class="mb-3">
+        <p>Nombres: <input type="text" class="form-control" id="nombresValor" status="info" name="nombresValor" nbInput #nombresValor required minlength="0" maxlength="100" size="20" ></p>
+        <p>Apellidos: <input type="text" class="form-control" id="apellidosValor" status="info" name="apellidosValor" nbInput #apellidosValor required minlength="0" maxlength="30" size="20"></p>
+        <!-- <p>Sexo: <input type="text" id="sexoValor" status="info" name="sexoValor" nbInput #sexoValor required minlength="0" maxlength="30" size="20"></p> -->
+        <label for="sexoLista">Seleccione Sexo:</label>
+        <input list="sexoValores" id="sexoLista" name="sexoLista" class="form-control" value="{{sexoValorLista}}" />
+          <datalist id="sexoValores">
+            <option value="Masculino">
+            <option value="Femenino">
+          </datalist>
+          <p></p>
+        <!-- <p>FechaNacimiento: <input type="text" id="fechaNacimientoValor" status="info" name="fehaNacimientoValor" nbInput #fehaNacimientoValor required minlength="0" maxlength="30" size="20"></p> -->
+        <form class="form-inline">
+          <div class="form-group">
+            <div class="input-group">
+              <p>Fecha Nacimiento: <input class="form-control" class="form-control" placeholder="yyyy-mm-dd"
+                     name="dp" [(ngModel)]="model" ngbDatepicker #d="ngbDatepicker" size="15" ></p>
+              <div class="input-group-append">
+                <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"></button>
+              </div>
+            </div>
+          </div>
+        </form>
+        <p>Salario: <input type="number" class="form-control" id="salarioValor" status="info" name="salarioValor" nbInput #salarioValor  required minlength="0" maxlength="30" size="20"></p>
+        <!-- <p>Vacunado Covid: <input type="text" class="form-control" id="vacunadoValor" status="info" name="vacunadoValor" nbInput #vacunadoValor required minlength="0" maxlength="30" size="20"></p> -->
+        <label for="vacunaLista">Esta Vacunado:</label>
+        <input list="vacunaValores" id="vacunaLista" name="vacunaLista" class="form-control" value="{{vacunaValorLista}}" />
+          <datalist id="vacunaValores">
+            <option value="Si">
+            <option value="No">
+          </datalist>
+        <!-- <input type="text" id="obj_id" > -->
+      </div>
+
+    </form>
+  </div>
+  <div class="modal-footer">
+    <!-- <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button> -->
+    <button type="button" class="btn btn-light" (click)="GuardarEmpleado()">Guardar</button>
+    <!-- <button type="button" class="btn btn-light" (click)="ActualizarGrid()">Cerrar y actualizar</button> -->
+
+
+  </div>
+</ng-template>
+
+<ng-template #longContent2 let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">EDITAR EMPLEADO</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form>
+      <div class="mb-3">
+        <p>Id: <input type="number" class="form-control" id="idValor" status="info" name="idValor" nbInput #idValor  required minlength="0" maxlength="30" size="20" value="{{id}}" disabled></p>
+        <p>Nombres: <input type="text" class="form-control" id="nombresValor" status="info" name="nombresValor" nbInput #nombresValor required minlength="0" maxlength="100" size="20" value="{{nombre}}"></p>
+        <p>Apellidos: <input type="text" class="form-control" id="apellidosValor" status="info" name="apellidosValor" nbInput #apellidosValor required minlength="0" maxlength="30" size="20" value="{{apellidos}}"></p>
+        <!-- <p>Sexo: <input type="text" class="form-control" id="sexoValor" status="info" name="sexoValor" nbInput #sexoValor required minlength="0" maxlength="30" size="20" value="{{sexo}}" ></p> -->
+        <label for="sexoLista">Seleccione Sexo:</label>
+        <input list="sexoValores" id="sexoLista" name="sexoLista" class="form-control" value="{{sexo}}" />
+          <datalist id="sexoValores">
+            <option value="Masculino">
+            <option value="Femenino">
+          </datalist>
+          <p></p>
+        <!-- <p>FechaNacimiento: <input type="text" id="fechaNacimientoValor" status="info" name="fehaNacimientoValor" nbInput #fehaNacimientoValor required minlength="0" maxlength="30" size="20" value="{{fechaNacimiento}}" ></p> -->
+        <p></p>
+        <form class="form-inline">
+          <div class="form-group">
+            <div class="input-group">
+              <p>Fecha Nacimiento: <input class="form-control" class="form-control" placeholder="yyyy-mm-dd"
+                     name="dp" [(ngModel)]="model" ngbDatepicker #d="ngbDatepicker" size="15" ></p>
+              <div class="input-group-append">
+                <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"></button>
+              </div>
+            </div>
+          </div>
+        </form>
+        <p>Salario: <input type="number" class="form-control" id="salarioValor" status="info" name="salarioValor" nbInput #salarioValor  required minlength="0" maxlength="30" size="20" value="{{salario}}"></p>
+        <!-- <p>Vacunado Covid: <input type="text" class="form-control" id="vacunadoValor" status="info" name="vacunadoValor" nbInput #vacunadoValor required minlength="0" maxlength="30" size="20" value="{{vacunadoCovid}}"></p> -->
+        <label for="vacunaLista">Esta Vacunado:</label>
+        <input list="vacunaValores" id="vacunaLista" name="vacunaLista" class="form-control" value="{{vacunadoCovid}}" />
+          <datalist id="vacunaValores">
+            <option value="Si">
+            <option value="No">
+          </datalist>
+        <!-- <input type="text" id="obj_id" > -->
+      </div>
+
+    </form>
+  </div>
+  <div class="modal-footer">
+    <!-- <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button> -->
+    <button type="button" class="btn btn-light" (click)="EditarEmpleado()">Guardar</button>
+
+  </div>
+</ng-template>
+
+<!-- <p class="text-center">Posted</p> -->
+<div class="form-group ">
+</div>
+<!-- <div class="form-group ">
+</div> -->
+<div class="col text-center">
+  <button style="width: 800px;;" type="button" class="btn btn-outline-dark btn-lg" disabled >EMPLEADOS</button>
+</div>
+<!-- <div>
+  <button style="float: right;" type="button" class="btn btn-primary btn-lg" (click)="CrearEmpleado(longContent)" >Cear Empleado</button>
+  <button type="button" class="btn btn-outline-dark btn-lg" disabled >EMPLEADOS</button>
+</div> -->
+<div class="form-group ">
+  <!-- <button  type="button" class="btn btn-secondary btn-lg" disabled>EMPLEADOS</button> -->
+</div>
+
+<form>
+  <!-- <div class="form-group form-inline">
+    <td><button type="button" class="btn btn-secondary btn-lg" disabled>EMPLEADOS</button></td>
+</div> -->
+  <div class="form-group form-inline">
+    BUSCAR: <input class="form-control ml-2" type="text" name="searchTerm" [(ngModel)]="searchTerm" size="150"/>
+    <span class="ml-3" *ngIf="loading$ | async"></span>
+    <!-- <td><button nbButton shape="semi-round" status="primary" (click)="CrearEmpleado()">Crear Orden</button></td> -->
+    <!-- <td><button type="button" class="btn btn-primary" (click)="CrearEmpleado(longContent)">Cear Empleado</button></td> -->
+    <td><button type="button" class="btn btn-outline-secondary btn-sm" (click)="BuscarEmpleados()">Buscar</button></td>
+    <td><button type="button" class="btn btn-outline-secondary btn-sm" (click)="CargarEmpleados()">Refresh</button></td>
+</div>
+<div class="form-group form-inline">
+  <td style="float: right;"><button type="button" class="btn btn-primary" (click)="CrearEmpleado(longContent)" >Cear Empleado</button></td>
+</div>
+<table class="table table-striped">
+<thead>
+  <tr>
+    <!-- <th scope="col">Id</th> -->
+    <th scope="col">Nombres</th>
+    <th scope="col">Apellidos</th>
+    <th scope="col">Sexo</th>
+    <th scope="col">Fecha Nacimiento</th>
+    <th scope="col">Edad A La Fecha</th>
+    <th scope="col">Salario</th>
+    <th scope="col">Vacunado Covid</th>
+    <th scope="col">Editar</th>
+    <th scope="col">Eliminar</th>
+  </tr>
+</thead>
+<tbody>
+<tr *ngFor="let empleados of empleados$ | async">
+  <!-- <th scope="row">{{ empleados.Id }}</th> -->
+  <!-- <td><ngb-highlight [result]="empleados.Id | number" [term]="filter.value"></ngb-highlight></td> -->
+  <td><ngb-highlight [result]="empleados.Nombres" [term]="filter.value"></ngb-highlight></td>
+  <td><ngb-highlight [result]="empleados.Apellidos" [term]="filter.value"></ngb-highlight></td>
+  <td><ngb-highlight [result]="empleados.Sexo" [term]="filter.value"></ngb-highlight></td>
+  <td><ngb-highlight [result]="empleados.FechaNacimiento" [term]="filter.value"></ngb-highlight></td>
+  <td><ngb-highlight [result]="empleados.EdadALaFecha" [term]="filter.value"></ngb-highlight></td>
+  <td><ngb-highlight [result]="empleados.Salario | number" [term]="filter.value"></ngb-highlight></td>
+  <td><ngb-highlight [result]="empleados.VacunadoCovid" [term]="filter.value"></ngb-highlight></td>
+  <td><button type="button" class="btn btn-success" (click)="EditarPopUp(longContent2, empleados.Id, empleados.Nombres, empleados.Apellidos, empleados.Sexo, empleados.FechaNacimiento, empleados.Salario, empleados.VacunadoCovid)">Editar</button>
+  <td><button type="button" class="btn btn-danger" (click)="EliminarEmpleado(empleados.Id)">Eliminar</button>
+  </td>
+
+  <!-- <td><button (click)="Edit(ordenes.order, ordenes.name, ordenes.description, ordenes.reference, ordenes.orderLength)" nbButton>EDIT</button></td> -->
+  <!-- <td><button nbButton shape="semi-round" status="primary" (click)="Edit(ordenes.order, ordenes.name, ordenes.description, ordenes.reference, ordenes.orderLength, ordenes.origen, ordenes.cutsNumber, ordenes.cutsWidth, ordenes.cutsLength)">EDIT</button></td> -->
+
+</tr>
+</tbody>
+</table>
+
+  <div class="d-flex justify-content-between p-2">
+
+   <ngb-pagination
+   [collectionSize]="(total$ | async)!" [(page)]="page" [pageSize]="pageSize">
+  </ngb-pagination>
+  <select class="custom-select" style="width: auto" name="pageSize" [(ngModel)]="pageSize">
+    <!-- <option [ngValue]="2">2 items per page</option> -->
+    <option [ngValue]="5">5 items per page</option>
+    <option [ngValue]="10">10 items per page</option>
+    <option [ngValue]="15">15 items per page</option>
+
+  </select>
+</div>
+<!-- <td><button nbButton shape="semi-round" status="primary" (click)="Refresh()">Refrescar</button></td> -->
+
+</form>
+
+<div>
+  <label>Total de empleados = {{totalEmpleados}}</label>
+</div>
+<div>
+  <label>Total salario: {{totalSalario}}</label>
+  <!-- <input type="number" id="totalSalario" name="totalSalario" disabled value="{{totalSalario}}"> -->
+</div>
+
+
+

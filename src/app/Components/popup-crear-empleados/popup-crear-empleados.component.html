@@ -1,0 +1,147 @@
+<ng-template #longContent let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">CREAR EMPLEADO</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form>
+      <div class="mb-1">
+        <p>Nombres: <input type="text" id="nombresValor" status="info" name="nombresValor" nbInput #nombresValor required minlength="0" maxlength="100" size="20" value="{{prueba}}"></p>
+        <p>Apellidos: <input type="text" id="apellidosValor" status="info" name="apellidosValor" nbInput #apellidosValor required minlength="0" maxlength="30" size="20"></p>
+        <!-- <p>Sexo: <input type="text" id="sexoValor" status="info" name="sexoValor" nbInput #sexoValor required minlength="0" maxlength="30" size="20"></p> -->
+        <label for="sexoLista">Choose a flavor:</label>
+          <input list="sexoValores" id="sexoLista" name="sexoLista" value="{{aa}}" />
+            <datalist id="sexoValores">
+              <option value="Masculino">
+              <option value="Femenino">
+            </datalist>
+        <!-- <p>FechaNacimiento: <input type="text" id="fechaNacimientoValor" status="info" name="fehaNacimientoValor" nbInput #fehaNacimientoValor required minlength="0" maxlength="30" size="20"></p> -->
+        <form class="form-inline">
+          <div class="form-group">
+            <div class="input-group">
+              <p>Fecha Nacimiento: <input class="form-control" placeholder="yyyy-mm-dd"
+                     name="dp" [(ngModel)]="model" ngbDatepicker #d="ngbDatepicker" size="15" ></p>
+              <div class="input-group-append">
+                <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"></button>
+              </div>
+            </div>
+          </div>
+        </form>
+        <p>Salario: <input type="number" id="salarioValor" status="info" name="salarioValor" nbInput #salarioValor  required minlength="0" maxlength="30" size="20"></p>
+        <p>Vacunado Covid: <input type="text" id="vacunadoValor" status="info" name="vacunadoValor" nbInput #vacunadoValor required minlength="0" maxlength="30" size="20"></p>
+        <!-- <form class="form-inline">
+          <div class="form-group">
+            <div class="input-group">
+              <input class="form-control" placeholder="yyyy-mm-dd"
+                     name="dp" [(ngModel)]="model" ngbDatepicker #d="ngbDatepicker">
+              <div class="input-group-append">
+                <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"></button>
+              </div>
+            </div>
+          </div>
+        </form> -->
+        <!-- <input type="text" id="obj_id" > -->
+      </div>
+
+    </form>
+  </div>
+  <div class="modal-footer">
+    <!-- <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button> -->
+    <button type="button" class="btn btn-light" (click)="Guardar()">Guardar</button>
+
+  </div>
+</ng-template>
+
+<button class="btn btn-outline-primary mb-2 mr-2" (click)="openScrollableContent(longContent)">Modal scrollable content</button>
+
+
+<!-- <form class="form-inline">
+  <div class="form-group">
+    <div class="input-group">
+      <input class="form-control" placeholder="yyyy-mm-dd"
+             name="dp" [(ngModel)]="model" ngbDatepicker #d="ngbDatepicker">
+      <div class="input-group-append">
+        <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"></button>
+      </div>
+    </div>
+  </div>
+</form> -->
+
+<hr/>
+<!-- <pre>Model: {{ model | json }}</pre> -->
+
+
+<!-- <button class="btn btn-outline-primary mb-2 mr-2" (click)="ModelDatePicker()">Modal scrollable content</button> -->
+
+<label for="sexoLista">Choose a flavor:</label>
+<input list="sexoValores" id="sexoLista" name="sexoLista" />
+<datalist id="sexoValores">
+    <option value="Masculino">
+    <option value="Femenino">
+</datalist>
+
+<button class="btn btn-outline-primary mb-2 mr-2" (click)="Guardar()">Modal scrollable content</button>
+
+
+
+<!-- <ngb-alert class="mt-3 mb-0" type="info" [dismissible]="false">
+  You must provide the icon for the button. This allows you
+  to choose an icon that matches your application's style.
+  In this example, the icon is set via a CSS class.
+</ngb-alert> -->
+
+<!-- <ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">Modal title</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <p>One fine body&hellip;</p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+  </div>
+</ng-template> -->
+
+<!-- <ng-template #longContent let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">Modal title</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form>
+      <div class="mb-3">
+        <p>Orden: <input type="text" id="ordenValor" status="info" name="ordenValor" nbInput #ordenValor required minlength="0" maxlength="30" size="10"></p>
+        <input type="text" id="obj_id" >
+      </div>
+      <div class="mb-3">
+        <label for="recipient-name" class="col-form-label">Recipient:</label>
+        <input type="text" class="form-control" id="recipient-name">
+      </div>
+      <div class="mb-3">
+        <label for="message-text" class="col-form-label">Message:</label>
+        <textarea class="form-control" id="message-text"></textarea>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+    <button type="button" class="btn btn-light" (click)="Guardar()">Guardar</button>
+
+  </div>
+</ng-template> -->
+
+<!-- <button class="btn btn-outline-primary mb-2 mr-2" (click)="openWindowCustomClass(content)">Modal with window custom class</button>
+<button class="btn btn-outline-primary mb-2 mr-2" (click)="openBackDropCustomClass(content)">Modal with backdrop custom class</button>
+<button class="btn btn-outline-primary mb-2 mr-2" (click)="openSm(content)">Small modal</button>
+<button class="btn btn-outline-primary mb-2 mr-2" (click)="openLg(content)">Large modal</button>
+<button class="btn btn-outline-primary mb-2 mr-2" (click)="openXl(content)">Extra large modal</button> -->
+<!-- <button class="btn btn-outline-primary mb-2 mr-2" (click)="openVerticallyCentered(content)">Modal vertically centered</button> -->
+<!-- <button class="btn btn-outline-primary mb-2 mr-2" (click)="openScrollableContent(longContent)">Modal scrollable content</button> -->
+<!-- <button class="btn btn-outline-primary mb-2 mr-2" (click)="openModalDialogCustomClass(content)">Modal with dialog custom class</button> -->
