@@ -14,16 +14,6 @@ interface Empleados {
     vacunacionCovid: string;
   }
 
-  // interface EmpleadosEditar {
-  //   Id: number;
-  //   Nombres: string;
-  //   Apellidos: string;
-  //   Sexo: string;
-  //   FechaNacimiento: string;
-  //   Salario: number;
-  //   VacunadoCovid: string;
-  // }
-
 @Injectable({
     providedIn: 'root',
 })
@@ -79,11 +69,6 @@ async PostJsonEnviarNumeroYSalarioEmpleados(url:string, json: any){
     return this.http.delete(url);
 }
 
-    // PostJson(url: string, propiedadesActualizar) {
-    //     return this.http.post(url, propiedadesActualizar, this.httpOptions);
-    // }
-    // Suma() {
-    //     console.log(5 + 5);
-    // }
+
 
 }

@@ -62,10 +62,7 @@ export class GridEmpleadosComponetComponent implements OnInit {
   model!: NgbDateStruct;
   public static modelDatePicker:  NgbDateStruct;
 
-  // prueba = 'Jac'
-   // prueba = 'Jac'
-   // prueba = 'Jac'
-  // prueba = 'Jac'
+
   private alive = true;
   cantidadEmpleadosBuscar!: number;
    empleadosBuscar:any;
@@ -147,21 +144,15 @@ export class GridEmpleadosComponetComponent implements OnInit {
 
   }
 
-  // ActualizarGrid(){
-  //   this.CargarEmpleados;
-  // }
-
   CargarEmpleados(){
 
     this.apiGetComp.GetJson('http://localhost/APIEmpleados.Servicio/api/Empleados/ObtenerEmpleados')
     .pipe(takeWhile(() => this.alive))
     .subscribe((res: any) => {
       EMPLEADOS = res;
-      // this.empleados = EMPLEADOS
       this._search$.next();
       this.totalEmpleados = EMPLEADOS.length
-            // console.log(this.empleados);
-            // console.log();
+
    });
 
    this.apiGetComp.GetJsonSalario('http://localhost/APIEmpleados.Servicio/api/Empleados/ObtenerTotalSalario')
@@ -175,17 +166,7 @@ export class GridEmpleadosComponetComponent implements OnInit {
     // console.log(formatterPeso.format(10000))
     this.totalSalario = formatterPeso.format(res);
    });
-  //  const formatterPeso = new Intl.NumberFormat('es-CO', {
-  //   style: 'currency',
-  //   currency: 'COP',
-  //   minimumFractionDigits: 0
-  // })
-  // console.log(formatterPeso.format(10000))
-  // this.totalSalario =formatterPeso.format(10000);
    this._search$.next();
-  //  console.log(EMPLEADOS[0].nombres);
-  //  this.nombreLabel = EMPLEADOS[0k].nombres;
-
   }
 
   _search(): Observable<SearchResult2> {
@@ -214,47 +195,25 @@ export class GridEmpleadosComponetComponent implements OnInit {
     console.log(sumaSalario);
 
     var json = {NumeroEmpleados: this.cantidadEmpleadosBuscar, TotalSalarioEmpleados: sumaSalario}
-    // console.log(json)
-    // console.log(this.empleadosBuscar);
     this.EnviarJson(this.empleadosBuscar,json);
 
   }
 
   async EnviarJson(empleadosBuscar:any,json:any){
-    console.log(empleadosBuscar);
-    console.log(json);
-
-
-    // const respuestaRaw = await fetch("http://localhost/APIEmpleados.Servicio/api/Empleados/RecibirJsonEmpleados", {
-    //   body: JSON.stringify(empleadosBuscar), // <-- Aquí van los datos
-    //   headers: {
-    //     "Content-Type": "application/json", // <-- Importante el encabezado
-    //   },
-    //   method: "POST",
-    // });
-    // const jsonDecodificado = await respuestaRaw.json();
     this.apiGetComp.PostJsonEnviarEmpleados("http://localhost/APIEmpleados.Servicio/api/Empleados/RecibirJsonEmpleados", empleadosBuscar)
     this.apiGetComp.PostJsonEnviarNumeroYSalarioEmpleados("http://localhost/APIEmpleados.Servicio/api/Empleados/RecibirJsonNumeroYSalarioEmpleados", json)
 
-    // console.log(respuuesta);
   }
 
   CrearEmpleado(longContent: any){
     var fechaActual = new Date();
-    // fechaActual = Date.;
-    // console.log(fechaActual.getMonth());
     this.model = {year: fechaActual.getFullYear(), month: fechaActual.getMonth()+1, day: fechaActual.getDate()}
-
     this.empleadoCrearPopup.openScrollableContent(longContent);
-    // alert("Crear Empleado")
-    // this.CargarEmpleados();
   }
 
   GuardarEmpleado(){
     GridEmpleadosComponetComponent.modelDatePicker = this.model;
     this.empleadoCrearPopup.Guardar();
-    // delay(500);
-    // this.CargarEmpleados();
     this.alive;
   }
 
@@ -266,12 +225,9 @@ export class GridEmpleadosComponetComponent implements OnInit {
   }
 
   EliminarEmpleado(id:any){
-    // alert("Eliminar " + id);
-    // delay(200)
     this.apiGetComp.DeleteJson(`http://localhost/APIEmpleados.Servicio/api/Empleados/EliminarEmpleados?id=${id}`)
     .pipe(takeWhile(() => this.alive))
     .subscribe(res=>res)
-    // delay(500);
     this.CargarEmpleados();
   }
 
@@ -280,10 +236,7 @@ export class GridEmpleadosComponetComponent implements OnInit {
     this.nombre = nombres;
     this.apellidos = apellidos;
     this.sexo = sexo;
-    // this.fechaNacimiento = fechaNacimiento;
-    // console.log(fechaNacimiento.split("-",3)[0]);
     this.model = {year: parseInt(fechaNacimiento.split("-",3)[0]), month: parseInt(fechaNacimiento.split("-",3)[1]), day: parseInt(fechaNacimiento.split("-",3)[2])}
-    // this.model = {year: 2021, month: 1, day: 3}
     this.salario = salario;
     this.vacunadoCovid = vacunadoCovid;
     this.empleadoCrearPopup.openScrollableContent(longContent2);
