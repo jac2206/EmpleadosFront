@@ -192,7 +192,7 @@ export class GridEmpleadosComponetComponent implements OnInit {
     var sumaSalario = 0;
     this.empleadosBuscar.forEach((element: any) =>
     sumaSalario = sumaSalario + element.Salario);
-    console.log(sumaSalario);
+    // console.log(sumaSalario);
 
     var json = {NumeroEmpleados: this.cantidadEmpleadosBuscar, TotalSalarioEmpleados: sumaSalario}
     this.EnviarJson(this.empleadosBuscar,json);
@@ -200,6 +200,8 @@ export class GridEmpleadosComponetComponent implements OnInit {
   }
 
   async EnviarJson(empleadosBuscar:any,json:any){
+    console.log(empleadosBuscar);
+    console.log(json);
     this.apiGetComp.PostJsonEnviarEmpleados("http://localhost/APIEmpleados.Servicio/api/Empleados/RecibirJsonEmpleados", empleadosBuscar)
     this.apiGetComp.PostJsonEnviarNumeroYSalarioEmpleados("http://localhost/APIEmpleados.Servicio/api/Empleados/RecibirJsonNumeroYSalarioEmpleados", json)
 
